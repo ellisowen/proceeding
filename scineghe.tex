@@ -1,0 +1,211 @@
+% Please use the skeleton file you have received in the 
+% invitation-to-submit email, where your data are already
+% filled in. Otherwise please make sure you insert your 
+% data according to the instructions in PoSauthmanual.pdf
+\documentclass{PoS}
+
+\title{The $\gamma$-ray Milky Way above 10 GeV:\\
+Distinguishing Sources from Diffuse Emission}
+
+\ShortTitle{Distinguishing Sources from Diffuse Emission}
+
+\author{\speaker{E. Owen},$^a$ C. Deil,$^{a}$ A. Donath,$^{a}$ R. Terrier$^{b}$\\
+\llap{$^a$}Max-Planck-Institut f\"{u}r Kernphysik, P.O. Box 103980, D
+69029 Heidelberg, Germany\\
+\llap{$^b$}Astroparticule \& Cosmologie, CNRS, 75205 Paris Cedex 13, France\\
+E-mail: \email{ellis.owen@mpi-hd.mpg.de}, \email{christoph.deil@mpi-hd.mpg.de}, \email{axel.donath@mpi-hd.mpg.de}, \email{terrier@apc.univ-paris7.fr}}
+
+
+\abstract{One of the most prominent features of the gamma-ray sky is the emission from our own galaxy. The Galactic plane has been observed by \textit{Fermi}/LAT in GeV and H.E.S.S. in TeV light. Fermi has modeled the Galactic emission as the sum of a complex "diffuse" emission model with the predominately point source catalogs of 1FHL and 2FGL, while H.E.S.S. has primarily detected extended TeV sources. At GeV energies, Galactic diffuse emission dominates the gamma-ray Milky Way but, as sources have hard spectra, it is likely their emission dominates at TeV energies. Generally the spatial shape and fraction of source emission compared to diffuse emission in the Galactic plane is not well known and is dependent on the source detection method, threshold and diffuse emission modeling methods used. \\
+
+We present simple image-analysis based methods applied to Fermi data from 10 GeV to 500 GeV, covering a region of +/- 5 degrees in Galactic latitude and +/- 100 degrees in Galactic longitude, to separate source and diffuse emission. These methods include significance clipping to exclude sources combined with elongated filter smoothing and template fitting with Planck and a Gaussian band model. We compare these methods with one another, and also against models based on the Fermi 1FHL catalog, and apply them to very simple model Galaxies to test the response for an input of known fraction and shape of diffuse and source emission.}
+
+\FullConference{Science with the New Generation of High Energy Gamma-ray experiments, 10th Workshop - Scineghe2014\\
+		04-06 June 2014\\
+		Lisbon - Portugal}
+    
+\usepackage{multirow}
+\usepackage{gensymb}
+\usepackage{wrapfig}
+\begin{document}
+
+\section{Introduction}
+\subsection{Motivation}
+There is a need in the community to find ways of reliably and automatically seperating sources from background emission. This may be for the purpose of better understanding sources for which background contributions are removed, for instance in the development of galactic diffuse models \cite{Fermidiffuse}, construction of source catalogs \cite{1fhl,hgps} or for the improvement of background subtraction methods for source or region morphology studies. 
+
+Alternatively, applications also exist for cases where sources must be removed instead of background, for instance galacitc diffuse emission studies \cite{Egberts} or in the analysis of extended galactic or extragalactic sources [example reference?].
+
+While at lower energies, many methods are be successfully devised to separate source and background emission [example reference??], the challenge lies in finding successful methods for the high-energy GeV and TeV regime where available datasets are increasingly limited by the number of cosmic rays observed.
+
+\subsection{Galactic Emission}
+At GeV and TeV energies, galactic emission may be split into three components; sources, truly galactic diffuse emission and the flux contributed by sources as yet to be resolved. While definitions in the literature vary, particularly with regard to unresolved and truly diffuse emission contributions, this study adopts the following convention (as illustrated in Figure 1).
+\begin{itemize}
+\item{\textbf{Sources} refers to known, observable source above a given instrument detection threshold.}
+\item{\textbf{Unresolved sources} are those sources which exist but fall below the detection threshold of a given instrument, and so are not recognised as distinct sources}
+\item{\textbf{Truly diffuse galactic emission} refers to the flux contribution from physical processes leading to diffuse cosmic ray emission - at higher TeV energies, this tends to be dominated by inverse Compton and $\pi^0$ decay while at lower GeV energies bremsstrahlung also contributes significantly.}
+\item{\textbf{Galactic background emission} refers to the galactic flux contribution which cannot be directly attriubuted to sources. This may be considered as the sum of the unresolved and truly diffuse emission contributions.}
+\end{itemize}
+
+In this work, we study methods of separating sources from galactic background emission using image-based techniques at energies above 10 GeV in order to understand appropriate methods for automatic background modelling and source detection.
+
+\begin{figure}[h!]
+  \centering
+      \includegraphics[width=0.75\textwidth]{figures/definitions.png}
+  \caption{Illustration for galactic emission definitions.}
+\end{figure}
+
+\section{Separation Algorithm}
+
+
+- Build on earlier outline
+- Go into full details of the algorithm here
+- Show the iteration results for each stage for one of the larger region iterations using the 1FHL + Fermi Diffuse background model as an example showing background and significance
+
+
+\subsection{Algorithm Parameters}
+
+TODO
+
+Note: For determining significance cut-off, take uniform input for large and small galactic region, poisson flucctuate and run the simulation with various significance cut-off values...
+
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Parameter} & \textbf{Value}\\\hline
+Significance cut off & 4 $\sigma$\\\hline
+Correlation radius & 0.3\degree \\\hline
+Mask dilation radius & 0.3\degree \\\hline
+Height of background kernel & 1\degree \\\hline
+Width of background kernel & 10\degree \\\hline
+Pixel size & 0.1\degree \\\hline
+\end{tabular}
+\end{center}
+\caption{Values of Separation Algorithm Parameters}
+\end{wrapfigure}
+
+
+\section{Dataset}
+Although a number of orbital and ground-based experiments and observatories exist to study the sky in $\gamma$ rays (such as HESS, Fermi/\textit{LAT}, MAGIC \& VERITAS to name a few examples), for which this work would be relevant, the aspects of the study based on true data make use of the 5-year data set from Fermi/\textit{LAT}. This is due to the good sky and galactic plane coverage at these high energies, near-uniform exposure and the large available dataset for which extensive source catalogs and galactic diffuse background models have already been published (for instance the Fermi/LAT 1FHL catalog \cite{1fhl}), against which the separation methods can be tested.
+
+\begin{wrapfigure}{l}{0.5\textwidth}
+  \begin{center}
+      \includegraphics[width=0.5\textwidth]{figures/counts.pdf}
+  \caption{Fermi/\textit{LAT} cosmic-ray events detected above energies to illustrate the energy distribution of cosmic-ray detections between 10 and 500 GeV.}
+  \end{center}
+\end{wrapfigure}
+
+The 5-year LAT data is used within a specified energy band between 10 and 500 GeV, covering much of the region of relevance at the cross-over of GeV and TeV studies in a well-defined and understood manner. The cosmic-rays detected for this dataset above a given lower energy cut-off are illustrated in Figure 2, for which the steep fall-off in higher-energy detections typical of GeV and TeV studies is evident.
+
+Table 1 quantifies the counts shown in the figure by outlining the counts seen in each of these regions at approximately logarithmically even energy binnings within the range of the selected events (and subsequent counts map).
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multirow{2}{*}{\textbf{Energy, $E$/$GeV$}} & \multicolumn{2}{|c|}{\textbf{Number of LAT Events}}\\
+ & All Sky & Galactic Plane \\\hline
+$10 < E \leq 30$ & 165564 & 49417 \\\hline
+$30 < E \leq 100$ & 34826 & 9643 \\\hline
+$100 < E \leq 500$ & 7911 & 1838 \\\hline
+$ E > 500$ & 818 & 143 \\\hline
+\end{tabular}
+\caption{Quantitative Illustration of Events observed between 10 GeV and 500 GeV}
+\end{table}
+
+\subsection{\textit{Fermi}/LAT PSF}
+
+
+Studies have shown that the \textit{Fermi}/LAT PSF is largely spatially independent at energies above 10 GeV.
+
+
+In the cases where PSF convolution is required for the 10 - 500 GeV energy band data study, the PSF is taken to be the that at the Galactic Center position, at a log-center energy in this band (78.4 GeV). This is then assumed to be the true PSF for the data in this energy range, and assumed to be spatially independent (as variations are minor). PSF information is outlined Table 3.
+
+
+\begin{wrapfigure}{l}{0.4\textwidth}
+\centering
+\resizebox{0.3\textwidth}{!}{
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Containment/$\%$} & \textbf{Radius/$deg$}\\\hline
+68.0 & 0.150 \\\hline
+95.0 & 0.867 \\\hline
+\end{tabular}}
+\caption{\textit{Fermi}/LAT PSF Containment}
+\end{wrapfigure}
+
+
+\section{Study Specifications}
+
+\subsection{Analysis Regions}
+
+The study specifically considers the ability of methods to differentiate between source and background emission. As such, it is sensible to choose regions of study restricted to the Galactic Plane as minimal diffuse or background emission is observed away from low galactic latitudes. As such, an analysis region of galactic latitude $-5 < b < 5$ and galactic longitude $-100 < l < 100$ is chosen to encompass the majority of the observed galactic emission, without deviating into the extra-galactic regime. This ensures regions of high source population density (at low latitudes and longitudes around the galactic center) as well as regions where background emission is likely to be more prevalent with fewer sources (away from the galactic plane and center) to allow methods to be tested in a range of situations: from regions of close, bright overlapping sources to areas sparesly populated by sources.
+
+\subsection{Parameters}
+
+TODO
+
+\section{Simulation}
+
+
+The input images applied to the algorithm may take a number of forms. In the first instance, these may be observational data provided as a counts map and, indeed, the application of the process to true data is the ultimate aim of this work, so as to provide a true measure of background Milky Way emission above 10 GeV. This is however an endpoint. To evaluate and study the method itself, an input must be chosen for which a known source population and flux contribution is used in combination with a known background flux contribution. This may be done in either taking an observationally-derived high-energy catalog (for instance the fermi 1FHL catalog of point sources) and adding these point sources to a background model, or simulating realistic galactic source population catalogs to overlay onto such a background emission model. In both cases, realistic simulated images must be developed in order to reflect the nature of the datasets to which the algorithm itself will ultimately be applied. This means physically-motivated background maps (derived from gas column density measurements) should be used in conjunction with either survey catalogs of observed sources or simulated galactic populations with a strong base in physical reasoning.
+
+
+In this study, both simulation methods are considered. The nature of the simulated and data inputs are summarized in Table (TODO).
+
+
+\subsection{Observationally-inpired Simulation}
+- TODO: 1FHL sources plus Fermi diffuse background model
+- Describe, summarise parameters and proportion of diffuse and source flux.
+
+\subsection{Model-inspired Simulation}
+
+An alternative to the simulation method above is to substitute the observational catalog with a model-inspired galactic source catalog simulation. This, in turn, can be added to a diffuse background model in a similar manor to before.
+
+While care is required in choosing suitable parameters to simulate a physically realistic galaxy source population, catalog simulation offers the advantage of greater sample of test galaxies - true source catalogs only exist for our own galaxy, offering a very limited test base.
+
+Such galactic modelling was studied in \cite{Strong}, and we reflect the source simulations here.
+
+- Add table of parameters for the 3 model galaxies
+- Maybe images of them too (aplpy).
+
+- As before, add fermi diffuse background model, parameters to be put into the table above.
+
+
+\section{Results}
+- A few images, but mainly results should be summarized in a table here.
+
+results for
+- 1FHL + fermi diffuse\\
+- Simulated galaxy 1 + fermi diffuse\\
+- Simulated galaxy 2 + fermi diffuse\\
+- Simulated galaxy 3 + fermi diffuse\\
+
+- Should include:\\
+    - Original background counts\\
+    - recovered background counts\\
+    - original source counts\\
+    - recovered source counts\\
+    - original number of sources\\
+    - recovered number of sources\\
+    - latitude and longitude profile of background before and after\\
+    - latitude and longitude profile of sources before and after
+        (these will give an idea as to how good the method in question was at separating sources in sparse and dense regions)
+    
+\section{Conclusions}
+
+
+\section{Summary}
+These methods are included in the affiliated astropy open-source package, gammapy \cite{Deil}.
+
+\begin{thebibliography}{99}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+
+\end{thebibliography}
+\end{document}
+
+
