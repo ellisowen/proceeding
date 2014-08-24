@@ -122,7 +122,10 @@ $ E > 500$ & 818 & 143 \\\hline
 Studies have shown that the \textit{Fermi}/LAT PSF is largely spatially independent at energies above 10 GeV.
 
 
-In the cases where PSF convolution is required for the 10 - 500 GeV energy band data study, the PSF is taken to be the that at the Galactic Center position, at a log-center energy in this band (78.4 GeV). This is then assumed to be the true PSF for the data in this energy range, and assumed to be spatially independent (as variations are minor). PSF information is outlined Table 3.
+In the cases where PSF convolution is required for the 10 - 500 GeV energy band data study, the PSF is taken to be the that at the Galactic Center position, at an energy within the band determined by the method outlined by Lafferty \& Wyatt in %\cite{lw}
+, assuming a powerlaw of spectral index -2.7... TODO: Check this.
+
+. This is then assumed to be the true PSF for the data in this energy range, and assumed to be spatially independent (as variations are minor). PSF information is outlined Table 3.
 
 
 \begin{wrapfigure}{l}{0.4\textwidth}
@@ -143,10 +146,6 @@ In the cases where PSF convolution is required for the 10 - 500 GeV energy band 
 \subsection{Analysis Regions}
 
 The study specifically considers the ability of methods to differentiate between source and background emission. As such, it is sensible to choose regions of study restricted to the Galactic Plane as minimal diffuse or background emission is observed away from low galactic latitudes. As such, an analysis region of galactic latitude $-5 < b < 5$ and galactic longitude $-100 < l < 100$ is chosen to encompass the majority of the observed galactic emission, without deviating into the extra-galactic regime. This ensures regions of high source population density (at low latitudes and longitudes around the galactic center) as well as regions where background emission is likely to be more prevalent with fewer sources (away from the galactic plane and center) to allow methods to be tested in a range of situations: from regions of close, bright overlapping sources to areas sparesly populated by sources.
-
-\subsection{Parameters}
-
-TODO
 
 \section{Simulation}
 
@@ -180,16 +179,33 @@ N(L_{\gamma}) = \frac{dN}{dL} = L_{\gamma}^{-1.5}
 Additionally, it is taken that the spatial distribution of pulsars offers representative example of spatial distribution of a galactic $\gamma$-ray source population \cite[p.2]{Strong}. Thus we use a galactocentric $(R, z)$ pulsar distribution model \cite[p.7]{Lorimer} to distribute sources, outlined in equation (2) - a gamma function - for the $\rho(R)$ radial source density distribution, and equation (3) - an exponential function - for the $\rho(z)$ distribution.
 
 \begin{equation}
-\rho(R) = A\left(\frac{R}{R_{\astrosun}}\right)^{B} \exp\left(-C\left[\frac{R-R_{\astrosun}}{R_{\sun}}\right]\right)
+\rho(R) = A\left(\frac{R}{R_{\astrosun}}\right)^{B} \exp\left(-C\left[\frac{R-R_{\astrosun}}{R_{\astrosun}}\right]\right)
 \end{equation}
 
 \begin{equation}
-\rho(z) = D \exp(-\mod{z}/E)
+\rho(z) = D \exp(-|z|/E)
 \end{equation}
 
-$R_{\astrosun}$ is taken as the radial position of the Sun with respect to the galactic center while $A, B, C, D$ and $E$ are fitted model parameters, taken as $A=1, B=1.9, C=5.0, D=1, E=0.05$ to reflect the galacitc pular distribution. Standard Monte-Carlo methods are used to sample $\rho(L_{\gamma}, R, z)$ throughout the simulated galaxy and then the resulting distribution is normalized and scaled at $R_{\astrosun}$ to an appropriate value.
+$R_{\astrosun}$ is taken as the radial position of the Sun with respect to the galactic center while $A, B, C, D$ and $E$ are model parameters discussed in the following. Standard Monte-Carlo methods are used to sample $\rho(L_{\gamma}, R, z)$ throughout the simulated galaxy and then the resulting distribution is normalized and scaled at $R_{\astrosun}$ to set an appropriate value to $A = \rho_{\astrosun}$ as the population density of the sun. Since the true radial distribution is the product $\rho(R, z) = \rho(R) \times \rho(z)$ and the overall normalization of $\rho(R, z)$ is set in $\rho(R)$ by the parameter $A$, the second $\rho(z)$ normalization parameter $D$ may be set to 1.
 
-In line with the 1FHL study, the $\rho(z)$ exponential constribution is scaled to an amplitude of 500 pc, and the radial distribution peaks at 4 kpc. A reference model is defined with $\rho_{\astrosun} = 3 \text{kpc}^{-3}$ with a minimum $\gamma$ luminosity $L_{\gamma, min} = 10^{34} \text{ph s}^{-1}$ and maximum $\gamma$ luminosity $L_{\gamma, min} = 10^{37} \text{ph s}^{-1}$. Two comparison models - both of higher population densities at the position of the sun, and lower luminosity bounds - are also considered. The relevant parameters of these three models are outlined in Table 3.
+In line with the 1FHL study, the radial distribution peaks at 4 kpc - thus $B = 4$ and $C = R_{\astrosun}$ to fall in line with this. The $\rho(z)$ exponential scale is set to 0.5 kpc (so $E=0.5$).  These are summarised in Table 3. 
+
+\begin{wrapfigure}{l}{0.4\textwidth}
+\centering
+\resizebox{0.3\textwidth}{!}{
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Model Parameter} & \textbf{Value}\\\hline
+$A$ & $\rho_{\astrosun}$ kpc$^{-2}$ \\\hline
+$B$ & 4 \\\hline
+$C$ & $R_{\astrosun}$ kpc \\\hline
+$D$ & 1 kpc$^{-1}$\\\hline
+$E$ & 0.5 kpc \\\hline
+\end{tabular}}
+\caption{Galaxy Modelling Parameter Values.}
+\end{wrapfigure}
+
+A reference model is defined with $\rho_{\astrosun} = 3 \text{kpc}^{-3}$ with a minimum $\gamma$ luminosity $L_{\gamma, min} = 10^{34} \text{ph s}^{-1}$ and maximum $\gamma$ luminosity $L_{\gamma, min} = 10^{37} \text{ph s}^{-1}$. Two comparison models - both of higher population densities at the position of the sun, and lower luminosity bounds - are also considered. The relevant parameters of these three models are outlined in Table 3.
 
 \begin{table}
 \centering
@@ -205,6 +221,28 @@ Simulation 2 & 30 & $1.5 \times 10^{33}$ & $1.5 \times 10^{36}$ \\\hline
 \end{table}
 
 - If space is left, include LogN/LogS distribtions of these simulated galaxies, and the 1FHL model.
+
+\subsection{Flux Distrubtions}
+
+The proportion of the total flux of the models in the galactic plane may be considered as an intitial measure of the galactic plane source density in the three simulated cases. Table 4 compares each of the simulated catalogs against the 1FHL catalog to offer a comparison, and to provide an indication of the distribution and density of each source population.
+
+TODO: make simulations and provide table of values
+
+\begin{table}
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Source Model} & \textbf{Total Flux/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/\%}\\\hline
+\testit{Fermi} 1FHL Catalog > 10 GeV &  &  & \\\hline
+Reference Simulation &  &  & \\\hline
+Simulation 1 &  &  &  \\\hline
+Simulation 2 &  &  &  \\\hline
+\end{tabular}}
+\caption{Galactic plane fluxes for source population catalogs.}
+\end{table}
+
+Before application to the source separation algorithm, the 1FHL and simulated catalogs are added to the integrated Fermi Diffuse background model \verb|gll_iem_v05_rev1.fit| between 10 GeV and 500 GeV to produce source/diffuse test cases. The integral flux of the background model in the galactic plane region contributes...TODO GET VALUE
 
 
 \section{Results}
