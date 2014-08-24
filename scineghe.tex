@@ -27,6 +27,8 @@ We present simple image-analysis based methods applied to Fermi data from 10 GeV
 \usepackage{multirow}
 \usepackage{gensymb}
 \usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{wasysym}
 \begin{document}
 
 \section{Introduction}
@@ -161,16 +163,48 @@ In this study, both simulation methods are considered. The nature of the simulat
 
 \subsection{Model-inspired Simulation}
 
-An alternative to the simulation method above is to substitute the observational catalog with a model-inspired galactic source catalog simulation. This, in turn, can be added to a diffuse background model in a similar manor to before.
+An alternative to the simulation method above is to substitute the observational catalog with a model-inspired galactic source catalog simulation. This, in turn, can be added to a diffuse background model in a similar manner to before.
 
 While care is required in choosing suitable parameters to simulate a physically realistic galaxy source population, catalog simulation offers the advantage of greater sample of test galaxies - true source catalogs only exist for our own galaxy, offering a very limited test base.
 
-Such galactic modelling was studied in \cite{Strong}, and we reflect the source simulations here.
+A recent catalog study was undertaken as part of the work in the Fermi 1FHL catalog, and is documented in the accompanying paper \cite{1fhl}. This study considered a reference galaxy of a similar source population and distribution to the Milky Way, and two further simulations aiming to provide test cases for source detection with different proportions of bright and faint sources, allowing the influence of these different populations upon the source detection methods and resulting source catalog to be understood. 
 
-- Add table of parameters for the 3 model galaxies
-- Maybe images of them too (aplpy).
+In this work, we use galactic simulations for two reasons. The first is to increase the number of test cases upon which the source separation algorithm can be tests, while the second is to gain a better understanding of how the algorithm is able to differentiate between sources and diffuse emission under different conditions - for instance, with a larger unresolved population or a more dense source distribution. This falls very much in line with the studies undertaken in the 1FHL catalog galaxy simulations, and as such we replicate the quoted simulation parameters \cite[p.59]{1fhl} for this work. This is outlined below.
 
-- As before, add fermi diffuse background model, parameters to be put into the table above.
+In line with \cite{Strong}, it is assumed that the luminosity function of the $\gamma$-ray source population between two limits $L_{\gamma, min}$ and $L_{\gamma, max}$ follows a simple power law of index -1.5, as per equation (1).
+
+\begin{equation}
+N(L_{\gamma}) = \frac{dN}{dL} = L_{\gamma}^{-1.5}
+\end{equation}
+
+Additionally, it is taken that the spatial distribution of pulsars offers representative example of spatial distribution of a galactic $\gamma$-ray source population \cite[p.2]{Strong}. Thus we use a galactocentric $(R, z)$ pulsar distribution model \cite[p.7]{Lorimer} to distribute sources, outlined in equation (2) - a gamma function - for the $\rho(R)$ radial source density distribution, and equation (3) - an exponential function - for the $\rho(z)$ distribution.
+
+\begin{equation}
+\rho(R) = A\left(\frac{R}{R_{\astrosun}}\right)^{B} \exp\left(-C\left[\frac{R-R_{\astrosun}}{R_{\sun}}\right]\right)
+\end{equation}
+
+\begin{equation}
+\rho(z) = D \exp(-\mod{z}/E)
+\end{equation}
+
+$R_{\astrosun}$ is taken as the radial position of the Sun with respect to the galactic center while $A, B, C, D$ and $E$ are fitted model parameters, taken as $A=1, B=1.9, C=5.0, D=1, E=0.05$ to reflect the galacitc pular distribution. Standard Monte-Carlo methods are used to sample $\rho(L_{\gamma}, R, z)$ throughout the simulated galaxy and then the resulting distribution is normalized and scaled at $R_{\astrosun}$ to an appropriate value.
+
+In line with the 1FHL study, the $\rho(z)$ exponential constribution is scaled to an amplitude of 500 pc, and the radial distribution peaks at 4 kpc. A reference model is defined with $\rho_{\astrosun} = 3 \text{kpc}^{-3}$ with a minimum $\gamma$ luminosity $L_{\gamma, min} = 10^{34} \text{ph s}^{-1}$ and maximum $\gamma$ luminosity $L_{\gamma, min} = 10^{37} \text{ph s}^{-1}$. Two comparison models - both of higher population densities at the position of the sun, and lower luminosity bounds - are also considered. The relevant parameters of these three models are outlined in Table 3.
+
+\begin{table}
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Source Model} & \textbf{Population Density at the Sun/$kpc^{-3}$} & \textbf{Minimum Luminosity/$ph s^{-1}$} & \textbf{Maximum Luminosity/$ph s^{-1}$}\\\hline
+Reference Simulation & 3 & $10^{34}$ & $10^{37}$\\\hline
+Simulation 1 & 10 & $4 \times 10^{33}$ & $4 \times 10^{36}$ \\\hline
+Simulation 2 & 30 & $1.5 \times 10^{33}$ & $1.5 \times 10^{36}$ \\\hline
+\end{tabular}}
+\caption{Parameters for 10 - 500 GeV Galaxy Population Simulations.}
+\end{table}
+
+- If space is left, include LogN/LogS distribtions of these simulated galaxies, and the 1FHL model.
 
 
 \section{Results}
