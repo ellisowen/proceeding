@@ -59,16 +59,20 @@ In this work, we study methods of separating sources from galactic background em
 \section{Separation Algorithm}
 
 
-- Build on earlier outline
-- Go into full details of the algorithm here
-- Show the iteration results for each stage for one of the larger region iterations using the 1FHL + Fermi Diffuse background model as an example showing background and significance
+The initial algorithm that is tested in this study is based on significance clippings. Further methods should be considered in future work. The separation algorithm may be summarised in 4 steps for an input map of detected $\gamma$-ray events, known as a `counts map'.
+
+\begin{itemize}
+\item{\textbf{Initiation step:} Counts map is convolved with a background kernel to act as an initial background image.}
+\item{\textbf{Propagation step:} A significance image is computed from the counts map and background image. From this, an exclusion mask is determined, removing regions above a set significance threshold, and replacing these regions the respective values from the initial background image. The result is a (new) background image. The step repeats.}
+\item{\textbf{Termination step:} Once there is no change in the background image or exclusion mask, the propagation step ends and the final background image is returned.}
+\end{itemize}
 
 
 \subsection{Algorithm Parameters}
 
-TODO
+A number of parameters must be chosen for this iterative significance-clipping background estimator. Preliminary work and reasoning was used to select initial values for this study, summarised in table 2.
 
-Note: For determining significance cut-off, take uniform input for large and small galactic region, poisson flucctuate and run the simulation with various significance cut-off values...
+To determine the significance cut-off parameter, a uniform input for the galactic region was taken and poisson flucctuated. The algorithm was then applied for various significance cut-offs, and the final value was chosen when it could be seen that no regions were excluded such that the algorithm didn't identify poisson up-flucctuations as sources. The correlation radius and mask dilation radius were initially chosen here to be roughly equivalent to twice the value of Fermi-LAT Point Spread Function (why???), and the dimensions of the background kernel were chosen to offer a large region for pixel-wise localised background estimation, but not so large as to omit local variations in background emission - however this was the most subjective selection and is the clearest quantity to vary in studying this method. A pixel size of 0.1 degrees per pixel offered good resolution, while not being overly intensive on computing resources and time.
 
 
 \begin{wrapfigure}{r}{0.5\textwidth}
@@ -240,11 +244,61 @@ Simulation 2 & $1.93\text{e}^{-7}$ & $1.99\text{e}^{-8}$ & 10.3 \\\hline
 \caption{Galactic plane fluxes for source population catalogs.}
 \end{table}
 
-Before application to the source separation algorithm, the 1FHL and simulated catalogs are added to the integrated Fermi Diffuse background model \verb|gll_iem_v05_rev1.fit| between 10 GeV and 500 GeV to produce source/diffuse test cases. The integral flux of the background model in the galactic plane region contributes an all-sky flux of ??, of which ?? is contributed by the galactic plane region.
+Before application to the source separation algorithm, the 1FHL and simulated catalogs are added to the integrated Fermi Diffuse background model \verb|gll_iem_v05_rev1.fit| between 10 GeV and 500 GeV to produce source/diffuse test cases. The integral flux of the background model in the galactic plane region contributes an all-sky flux of $4.21\text{e}^{-6} \text{ph cm}^{-2}\text{s}^{-1}$, of which $2.85\text{e}^{-7} \text{ph cm}^{-2}\text{s}^{-1}$ ($6.77\%$) is contributed by the galactic plane region.
 
 
 \section{Results}
+
+The results of this study may be categorized as those relating the the simulated inputs used to understand the algorithm, and those relating to the applicaiton of the separation algorithm to real Fermi-LAT data.
+
+\subsection{Simulation Results}
+
+\begin{wrapfigure}{l}{0.6\textwidth}
+\centering
+\resizebox{0.6\textwidth}{!}{
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Source Model} & \textbf{True Source} & \textbf{Recovered Source}\\
+\textbf{(\& Fermi Diffuse Background)} & \textbf{Flux Fraction/\%} & \textbf{Flux Fraction/\%}\\\hline
+Fermi 1FHL Catalog > 10 GeV & 0.987 & \\\hline
+Reference Simulation & 5.63 & \\\hline
+Simulation 1 & 6.37 & \\\hline
+Simulation 2 & 6.52 & \\\hline
+\end{tabular}}
+\caption{Galaxy Modelling Parameter Values.}
+\end{wrapfigure}
+
+\begin{wrapfigure}{c}{\textwidth}
+  \begin{center}
+      \includegraphics[width=\textwidth]{figures/1FHL.pdf}
+  \caption{1FHL Catalog input image.}
+  \end{center}
+\end{wrapfigure}
+
+\begin{wrapfigure}{c}{\textwidth}
+  \begin{center}
+      \includegraphics[width=\textwidth]{figures/SIM1.pdf}
+  \caption{Reference Simulation galaxy input image.}
+  \end{center}
+\end{wrapfigure}
+
+\begin{wrapfigure}{c}{\textwidth}
+  \begin{center}
+      \includegraphics[width=\textwidth]{figures/SIM2.pdf}
+  \caption{Galaxy simulation 1 input image.}
+  \end{center}
+\end{wrapfigure}
+
+\begin{wrapfigure}{c}{\textwidth}
+  \begin{center}
+      \includegraphics[width=\textwidth]{figures/SIM3.pdf}
+  \caption{Galaxy simulation 2 input image.}
+  \end{center}
+\end{wrapfigure}
+\\
 - A few images, but mainly results should be summarized in a table here.
+
+
 
 results for
 - 1FHL + fermi diffuse\\
@@ -262,7 +316,11 @@ results for
     - latitude and longitude profile of background before and after\\
     - latitude and longitude profile of sources before and after
         (these will give an idea as to how good the method in question was at separating sources in sparse and dense regions)
-    
+
+\subsubsection{Fermi-LAT Data Results}
+
+TODO
+
 \section{Conclusions}
 
 
