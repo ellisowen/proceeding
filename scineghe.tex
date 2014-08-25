@@ -224,25 +224,23 @@ Simulation 2 & 30 & $1.5 \times 10^{33}$ & $1.5 \times 10^{36}$ \\\hline
 
 \subsection{Flux Distrubtions}
 
-The proportion of the total flux of the models in the galactic plane may be considered as an intitial measure of the galactic plane source density in the three simulated cases. Table 4 compares each of the simulated catalogs against the 1FHL catalog to offer a comparison, and to provide an indication of the distribution and density of each source population.
-
-TODO: make simulations and provide table of values
+The proportion of the total flux of the models in the galactic plane may be considered as an intitial measure of the galactic plane source density in the three simulated cases. Table 4 compares each of the simulated catalogs against the 1FHL catalog to offer a comparison, and to provide an indication of the distribution and density of each source population. It should be noted that the considerably lower relative galactic flux contribution of the 1FHL catalog-based model compared to the purely simulated models is likely to be due to experimentally unresolved sources in the galactic plane which are not detected by the LAT and so do not appear within the source catalog. A bias exists due to the background galactic emission, meaning that point sources away from the galactic plane may be more readily resolved and thus are more likely to appear in the catalog detections. A discussion can be found in chapter 6 of the 1FHL catalog paper \cite[p.59]{1fhl} for these models, and it is shown that in the case of the reference model, the $log(N)/log(S)$ source flux distribution plot matches the 1FHL catalog above the effective experimental detection threshold.
 
 \begin{table}
 \centering
 \resizebox{\textwidth}{!}{
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Source Model} & \textbf{Total Flux/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/\%}\\\hline
-\testit{Fermi} 1FHL Catalog > 10 GeV &  &  & \\\hline
-Reference Simulation &  &  & \\\hline
-Simulation 1 &  &  &  \\\hline
-Simulation 2 &  &  &  \\\hline
+\textbf{Source Model} & \textbf{Total Flux/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/ph cm$^{-2}$ s$^{-1}$} & \textbf{Proportion of Flux in Galactic Region/\%}\\\hline
+\testit{Fermi} 1FHL Catalog > 10 GeV & $1.60\text{e}^{-7}$ & $2.84\text{e}^{-9}$ & 1.77\\\hline
+Reference Simulation & $9.96\text{e}^{-8}$ & $1.70\text{e}^{-8}$ & 17.1\\\hline
+Simulation 1 & $1.93\text{e}^{-7}$ & $1.94\text{e}^{-8}$ & 10.0 \\\hline
+Simulation 2 & $1.93\text{e}^{-7}$ & $1.99\text{e}^{-8}$ & 10.3 \\\hline
 \end{tabular}}
 \caption{Galactic plane fluxes for source population catalogs.}
 \end{table}
 
-Before application to the source separation algorithm, the 1FHL and simulated catalogs are added to the integrated Fermi Diffuse background model \verb|gll_iem_v05_rev1.fit| between 10 GeV and 500 GeV to produce source/diffuse test cases. The integral flux of the background model in the galactic plane region contributes...TODO GET VALUE
+Before application to the source separation algorithm, the 1FHL and simulated catalogs are added to the integrated Fermi Diffuse background model \verb|gll_iem_v05_rev1.fit| between 10 GeV and 500 GeV to produce source/diffuse test cases. The integral flux of the background model in the galactic plane region contributes an all-sky flux of ??, of which ?? is contributed by the galactic plane region.
 
 
 \section{Results}
