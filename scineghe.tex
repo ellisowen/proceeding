@@ -157,12 +157,12 @@ The study specifically considers the ability of methods to differentiate between
 The input images applied to the algorithm may take a number of forms. In the first instance, these may be observational data provided as a counts map and, indeed, the application of the process to true data is the ultimate aim of this work, so as to provide a true measure of background Milky Way emission above 10 GeV. This is however an endpoint. To evaluate and study the method itself, an input must be chosen for which a known source population and flux contribution is used in combination with a known background flux contribution. This may be done in either taking an observationally-derived high-energy catalog (for instance the fermi 1FHL catalog of point sources) and adding these point sources to a background model, or simulating realistic galactic source population catalogs to overlay onto such a background emission model. In both cases, realistic simulated images must be developed in order to reflect the nature of the datasets to which the algorithm itself will ultimately be applied. This means physically-motivated background maps (derived from gas column density measurements) should be used in conjunction with either survey catalogs of observed sources or simulated galactic populations with a strong base in physical reasoning.
 
 
-In this study, both simulation methods are considered. The nature of the simulated and data inputs are summarized in Table (TODO).
+In this study, both simulation methods are considered. The nature of the simulated and data inputs are summarized in Table 6.
 
 
 \subsection{Observationally-inpired Simulation}
-- TODO: 1FHL sources plus Fermi diffuse background model
-- Describe, summarise parameters and proportion of diffuse and source flux.
+
+The first simulation involved the use of the 1FHL catalog of Fermi-LAT sources observed above 10 GeV. The simulation positioned these sources in a sky map to produce a flux image, which was then convolved with the appropriate Fermi PSF for the 10 to 500 GeV energy band. The resulting PSF convolved image has a total all-sky flux of $1.60\text{e}^{-7} \text{ph cm}^{-2}\text{s}^{-1}$, of which $2.84\text{e}^{-9} \text{ph cm}^{-2}\text{s}^{-1}$ .
 
 \subsection{Model-inspired Simulation}
 
@@ -236,7 +236,7 @@ The proportion of the total flux of the models in the galactic plane may be cons
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Source Model} & \textbf{Total Flux/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/ph cm$^{-2}$ s$^{-1}$} & \textbf{Proportion of Flux in Galactic Region/\%}\\\hline
-\testit{Fermi} 1FHL Catalog > 10 GeV & $1.60\text{e}^{-7}$ & $2.84\text{e}^{-9}$ & 1.77\\\hline
+\textit{Fermi} 1FHL Catalog > 10 GeV & $1.60\text{e}^{-7}$ & $2.84\text{e}^{-9}$ & 1.77\\\hline
 Reference Simulation & $9.96\text{e}^{-8}$ & $1.70\text{e}^{-8}$ & 17.1\\\hline
 Simulation 1 & $1.93\text{e}^{-7}$ & $1.94\text{e}^{-8}$ & 10.0 \\\hline
 Simulation 2 & $1.93\text{e}^{-7}$ & $1.99\text{e}^{-8}$ & 10.3 \\\hline
