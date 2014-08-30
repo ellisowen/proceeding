@@ -59,7 +59,7 @@ In this work, we study methods of separating sources from galactic background em
 \section{Separation Algorithm}
 
 
-The initial algorithm that is tested in this study is based on significance clippings. Further methods should be considered in future work. The separation algorithm may be summarised in 4 steps for an input map of detected $\gamma$-ray events, known as a `counts map'.
+The initial algorithm that is tested in this study is based on significance clipping. Further methods should be considered in future work. The separation algorithm may be summarised in 4 steps for an input map of detected $\gamma$-ray events, known as a `counts map'.
 
 \begin{itemize}
 \item{\textbf{Initiation step:} Counts map is convolved with a background kernel to act as an initial background image.}
@@ -299,6 +299,54 @@ Simulation 2 & 6.52 & \\\hline
 - A few images, but mainly results should be summarized in a table here.
 
 
+\subsubsection{Simulation Results}
+
+
+
+\begin{wrapfigure}{c}{\textwidth}
+  \begin{center}
+      \includegraphics[width=\textwidth]{figures/BG_1FHL.pdf}
+  \caption{Background estimation for 1FHL Catalog input image.}
+  \end{center}
+\end{wrapfigure}
+
+\begin{wrapfigure}{c}{\textwidth}
+  \begin{center}
+      \includegraphics[width=\textwidth]{figures/BG_SIM1.pdf}
+  \caption{Background estimation for reference galaxy input image.}
+  \end{center}
+\end{wrapfigure}
+
+\begin{wrapfigure}{c}{\textwidth}
+  \begin{center}
+      \includegraphics[width=\textwidth]{figures/BG_SIM2.pdf}
+  \caption{Background estimation for simulation 2 input image.}
+  \end{center}
+\end{wrapfigure}
+
+\begin{wrapfigure}{c}{\textwidth}
+  \begin{center}
+      \includegraphics[width=\textwidth]{figures/BG_SIM3.pdf}
+  \caption{Background estimation for simulation 3 input image.}
+  \end{center}
+\end{wrapfigure}
+
+
+\begin{table}
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Source Model} & \textbf{Total Flux/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/ph cm$^{-2}$ s$^{-1}$} & \textbf{Proportion of Flux in Galactic Region/\%}\\\hline
+\textit{Fermi} 1FHL Catalog > 10 GeV & $6.52\text{e}^{-6}$ & $2.83\text{e}^{-7}$ & 1.77\\\hline
+Reference Simulation & $4.30\text{e}^{-6}$ & $2.91\text{e}^{-7}$ & 6.78\\\hline
+Simulation 1 & $4.37\text{e}^{-6}$ & $2.97\text{e}^{-7}$ & 6.79 \\\hline
+Simulation 2 & $4.39\text{e}^{-6}$ & $2.99\text{e}^{-7}$ & 6.81 \\\hline
+\end{tabular}}
+\caption{Galactic plane fluxes for separated background images of the input simulation image catalogs.}
+\end{table}
+
+
 
 results for
 - 1FHL + fermi diffuse\\
@@ -320,6 +368,26 @@ results for
 \subsubsection{Fermi-LAT Data Results}
 
 TODO
+
+
+\begin{table}
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Source Model} & \textbf{Total Flux/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/ph cm$^{-2}$ s$^{-1}$} & \textbf{Proportion of Flux in Galactic Region/\%}\\\hline
+\textit{Fermi}-LAT Observed Data, 10-500 GeV & $1.90\text{e}^{-6}$ & $9.90\text{e}^{-8}$ & 5.20\\\hline
+\end{tabular}}
+\caption{Galactic plane fluxes for separated background from true Fermi-LAT data.}
+\end{table}
+
+
+\begin{wrapfigure}{c}{\textwidth}
+  \begin{center}
+      \includegraphics[width=\textwidth]{figures/BG_DATA.pdf}
+  \caption{Background estimation for Fermi-LAT Data.}
+  \end{center}
+\end{wrapfigure}
 
 \section{Conclusions}
 
