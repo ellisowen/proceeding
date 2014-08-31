@@ -40,6 +40,13 @@ Alternatively, applications also exist for cases where sources must be removed i
 While at lower energies, many methods are be successfully devised to separate source and background emission [example reference??], the challenge lies in finding successful methods for the high-energy GeV and TeV regime where available datasets are increasingly limited by the number of cosmic rays observed.
 
 \subsection{Galactic Emission}
+
+\begin{wrapfigure}{r}{0.6\textwidth}
+  \centering
+      \includegraphics[width=0.55\textwidth]{figures/definitions.png}
+  \caption{Illustration for galactic emission definitions.}
+\end{wrapfigure}
+
 At GeV and TeV energies, galactic emission may be split into three components; sources, truly galactic diffuse emission and the flux contributed by sources as yet to be resolved. While definitions in the literature vary, particularly with regard to unresolved and truly diffuse emission contributions, this study adopts the following convention (as illustrated in Figure 1).
 \begin{itemize}
 \item{\textbf{Sources} refers to known, observable source above a given instrument detection threshold.}
@@ -49,12 +56,6 @@ At GeV and TeV energies, galactic emission may be split into three components; s
 \end{itemize}
 
 In this work, we study methods of separating sources from galactic background emission using image-based techniques at energies above 10 GeV in order to understand appropriate methods for automatic background modelling and source detection.
-
-\begin{figure}[h!]
-  \centering
-      \includegraphics[width=0.75\textwidth]{figures/definitions.png}
-  \caption{Illustration for galactic emission definitions.}
-\end{figure}
 
 \section{Separation Algorithm}
 
@@ -296,7 +297,6 @@ Simulation 2 & 6.52 & \\\hline
   \end{center}
 \end{wrapfigure}
 \\
-- A few images, but mainly results should be summarized in a table here.
 
 
 \subsubsection{Simulation Results}
@@ -345,25 +345,6 @@ Simulation 2 & $4.39\text{e}^{-6}$ & $2.99\text{e}^{-7}$ & 6.81 \\\hline
 \end{tabular}}
 \caption{Galactic plane fluxes for separated background images of the input simulation image catalogs.}
 \end{table}
-
-
-
-results for
-- 1FHL + fermi diffuse\\
-- Simulated galaxy 1 + fermi diffuse\\
-- Simulated galaxy 2 + fermi diffuse\\
-- Simulated galaxy 3 + fermi diffuse\\
-
-- Should include:\\
-    - Original background counts\\
-    - recovered background counts\\
-    - original source counts\\
-    - recovered source counts\\
-    - original number of sources\\
-    - recovered number of sources\\
-    - latitude and longitude profile of background before and after\\
-    - latitude and longitude profile of sources before and after
-        (these will give an idea as to how good the method in question was at separating sources in sparse and dense regions)
 
 \subsubsection{Fermi-LAT Data Results}
 
