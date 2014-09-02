@@ -29,6 +29,11 @@ We present a simple image-analysis based method applied to Fermi data from 10 Ge
 \usepackage{wrapfig}
 \usepackage{amsmath}
 \usepackage{wasysym}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+
 \begin{document}
 
 \section{Introduction}
@@ -38,9 +43,11 @@ In this work, we study methods of separating sources from galactic background em
 \subsection{Motivation}
 
 \begin{wrapfigure}{r}{0.5\textwidth}
+\vspace{-20pt}
   \centering
       \includegraphics[width=0.5\textwidth]{figures/definitions.png}
-  \caption{Illustration for galactic emission definitions.}
+  \caption{Galactic emission definitions.}
+\vspace{-10pt}
 \end{wrapfigure}
 
 There is a need in the $\gamma$-ray astronomy community for a reliable method of separating source and background `diffuse' emission in the Milky Way. While such methods have been successfully implemented at lower energies, in high-energy GeV and TeV analysis, these methods are limited by the small number of cosmic rays observed. The challenge thus lies in finding good diffuse estimation methods for this statistics-limited regime.
@@ -49,21 +56,21 @@ There is a need in the $\gamma$-ray astronomy community for a reliable method of
 
 Galactic emission may be regarded as the sum of a number of distinct components. As definitions of these in the literature is non-standardized, we set here conventions for the terminology applied to this work. These definitions are illustrated in Figure 1.
 
-\begin{itemize}
-\item{\textbf{Sources} refer to resolvable sources of $\gamma$-rays, above a given instrument detection threshold.}
-\item{\textbf{Unresolved sources} are those sources which physically exist but fall below the detection threshold of a given instrument, and so are not distinguished as sources against a background signal.}
-\item{\textbf{Truly diffuse galactic emission} refers to the flux contribution from physical processes leading to diffuse cosmic ray emission - at TeV energies, this is dominated by inverse Compton and $\pi^0$ decay while at lower GeV energies bremsstrahlung also contributes significantly.}
-\item{\textbf{Galactic background emission} is the Galactic flux contribution which cannot be directly attriubuted to sources. As such, this is considered as the sum of the unresolved and truly diffuse emission contributions. In this work, this Galactic background emission is referred to as `diffuse' emission.}
+\begin{itemize}[noitemsep,nolistsep]
+\item \textbf{Sources} refer to resolvable sources of $\gamma$-rays, above a given instrument detection threshold.
+\item \textbf{Unresolved sources} are those sources which physically exist but fall below the detection threshold of a given instrument, and so are not distinguished as sources against a background signal.
+\item \textbf{Truly diffuse galactic emission} refers to the flux contribution from physical processes leading to diffuse cosmic ray emission - at TeV energies, this is dominated by inverse Compton and $\pi^0$ decay while at lower GeV energies bremsstrahlung also contributes significantly.
+\item \textbf{Galactic background emission} is the Galactic flux contribution which cannot be directly attriubuted to sources. As such, this is considered as the sum of the unresolved and truly diffuse emission contributions. In this work, this Galactic background emission is referred to as `diffuse' emission.
 \end{itemize}
 
 \section{Method}
 
 An algorithm based on significance clipping and convolution with an elongated background filter is introduced. The operation of the algorithm is summarized in the following steps.
 
-\begin{itemize}
-\item{\textbf{Initiation step:} Convolution of a counts map with a background kernel to act as an initial background image.}
-\item{\textbf{Propagation step:} A significance image is computed from the counts map and background image. From this, an exclusion mask is determined, removing regions above a set significance threshold. These regions are replaced with a background estimation based on the flux around the excluded source. A new background image results from convolution with an elongated background kernel. The step repeats with excluded regions dilated with each iteration for which they fall above the significance threshold.}
-\item{\textbf{Termination step:} Once there is no change in the exclusion mask, the propagation step ends and the final background image is returned.}
+\begin{itemize}[noitemsep,nolistsep]
+\item \textbf{Initiation step:} Convolution of a counts map with a background kernel to act as an initial background image.
+\item \textbf{Propagation step:} A significance image is computed from the counts map and background image. From this, an exclusion mask is determined, removing regions above a set significance threshold. These regions are replaced with a background estimation based on the flux around the excluded source. A new background image results from convolution with an elongated background kernel. The step repeats with excluded regions dilated with each iteration for which they fall above the significance threshold.
+\item \textbf{Termination step:} Once there is no change in the exclusion mask, the propagation step ends and the final background image is returned.
 \end{itemize}
 
 \subsection{Parameters}
@@ -73,6 +80,7 @@ The method is specified by six parameters, their values indicated in Table 2.
 The significance threshold was set through preliminary studies to understand how to avoid significance-triggering (and hence false source detection) on Poisson up-flucctuations. This was achieved by Poisson-flucctuating a uniform input image, and selecting a significance threshold above that for which false detections were avoided.
 
 \begin{wrapfigure}{l}{0.4\textwidth}
+\vspace{-10pt}
 \begin{center}
 \begin{tabular}{|c|c|}
 \hline
@@ -81,7 +89,10 @@ The significance threshold was set through preliminary studies to understand how
 95.0 & 0.867 \\\hline
 \end{tabular}
 \end{center}
-\caption{\textit{Fermi}-LAT PSF Containment representative of the 10-500 GeV energy band \footnotemark.}
+\makeatletter
+\def\@captype{table}
+\makeatother
+\caption{Representative \textit{Fermi}-LAT PSF Containment radii for the 10-500 GeV energy band}
 \end{wrapfigure}
 
 \footnotetext{The method described by \cite{lw} was used to determine an appropriate representative energy for the range considered.}
@@ -89,6 +100,7 @@ The significance threshold was set through preliminary studies to understand how
 The correlation radius and mask dilation radius were chosen to be of the order of the \textit{Fermi}-LAT PSF to optimize for point source detection (see Table 3), while an elongated background kernel was chosen to follow the expected elongated background signal of the Galactic plane. A pixel size of 0.1 degrees offered suitable resolution for Fermi source detection without leading to an excessive computational load during analysis.
 
 \begin{wrapfigure}{r}{0.5\textwidth}
+\vspace{-20pt}
 \begin{center}
 \begin{tabular}{|c|c|}
 \hline
@@ -101,7 +113,11 @@ Width of background kernel & 10\degree \\\hline
 Pixel size & 0.1\degree \\\hline
 \end{tabular}
 \end{center}
-\caption{Values of Separation Algorithm Parameters}
+\makeatletter
+\def\@captype{table}
+\makeatother
+\caption{Separation Algorithm Parameters}
+\vspace{-30pt}
 \end{wrapfigure}
 
 \subsection{Region of Interest}
@@ -119,11 +135,13 @@ The dataset upon which the method is demonstrated was drawn from experimental \t
 
 The available statistics of the energy range in question fall off steeply towards the higher end of the cut. There are thus suitable numbers of events for such an analysis to be undertaken on the data set, but fewer than might be neccessary with a conventional approach with a lower energy dataset. The statistics are outlined in Table 4 and Figure 1.
 
-\begin{wrapfigure}{l}{0.5\textwidth}
+\begin{wrapfigure}{l}{0.4\textwidth}
+\vspace{-30pt}
   \begin{center}
-      \includegraphics[width=0.5\textwidth]{figures/counts.pdf}
-  \caption{Fermi/\textit{LAT} cosmic-ray events detected above energies to illustrate the energy distribution of cosmic-ray detections between 10 and 500 GeV.}
+      \includegraphics[width=0.4\textwidth]{figures/counts.pdf}
+  \caption{Fermi/\textit{LAT} counts detected above specified Energy}
   \end{center}
+  \vspace{-30pt}
 \end{wrapfigure}
 
 \subsection{Simulation}
@@ -140,17 +158,9 @@ In the case where the simulated input took the PSF convolved 1FHL source catalog
 
 In the case where the source flux contribution was entirely simulated by model galaxies, the inputs were based on the study undertaken in the simulation work of the 1FHL Catalog paper \cite[p.59]{1fhl}, which was largely based on the work in \cite{Strong}. This considered a reference galaxy of a similar source population and distribution to the Milky Way, and two further simulations aiming to provide test cases for source detection with different proportions of bright and faint sources.
 
-In line with \cite{Strong}, it is assumed that the luminosity function of the $\gamma$-ray source population between two limits $L_{\gamma, min}$ and $L_{\gamma, max}$ follows a simple power law of index -1.5 and it is taken that the spatial distribution of pulsars offers representative example of spatial distribution of a galactic $\gamma$-ray source population \cite[p.2]{Strong}. Thus we use a galactocentric $(R, z)$ pulsar distribution model \cite[p.7]{Lorimer} to distribute sources for the $\rho(R)$ radial source density distribution, and an exponential function for the $\rho(z)$ distribution.
+In line with \cite{Strong}, it is assumed that the luminosity function of the $\gamma$-ray source population between two limits $L_{\gamma, min}$ and $L_{\gamma, max}$ follows a simple power law of index -1.5 and it is taken that the spatial distribution of pulsars offers representative example of spatial distribution of a galactic $\gamma$-ray source population \cite[p.2]{Strong}. Thus we use a galactocentric $(R, z)$ pulsar distribution model \cite[p.7]{Lorimer} to distribute sources for the $\rho(R)$ radial source density distribution, and an exponential function for the $\rho(z)$ distribution. Standard Monte-Carlo methods are used to sample $\rho(L_{\gamma}, R, z)$ throughout the simulated galaxy and then the resulting distribution is normalized and scaled at $R_{\astrosun}$ to the observed population density of the sun. In line with the 1FHL study, the radial distribution peaks at 4 kpc and the $\rho(z)$ exponential scale is set to 0.5 kpc.
 
-\begin{equation}
-\rho(R, z) = A\left(\frac{R}{R_{\astrosun}}\right)^{B} \exp\left(-C\left[\frac{R-R_{\astrosun}}{R_{\astrosun}}\right]\right)\exp(-|z|/D)
-\end{equation}
-
-$R_{\astrosun}$ is taken as the radial position of the Sun with respect to the galactic center. Standard Monte-Carlo methods are used to sample $\rho(L_{\gamma}, R, z)$ throughout the simulated galaxy and then the resulting distribution is normalized and scaled at $R_{\astrosun}$ to $A = \rho_{\astrosun}$ as the population density of the sun.
-
-In line with the 1FHL study, the radial distribution peaks at 4 kpc - thus $B = 4$ and $C = R_{\astrosun}$. The $\rho(z)$ exponential scale is set to 0.5 kpc (so $D=0.5$).
-
-A reference model is defined with $\rho_{\astrosun} = 3 \text{kpc}^{-3}$ with a minimum $\gamma$ luminosity $L_{\gamma, min} = 10^{34} \text{ph s}^{-1}$ and maximum $\gamma$ luminosity $L_{\gamma, min} = 10^{37} \text{ph s}^{-1}$. Two comparison models - both of higher population densities at the position of the sun and lower luminosity bounds - are also considered. These three models are outlined in Table 3.
+A reference model is defined with $\rho_{\astrosun} = 3 \text{kpc}^{-3}$ with a minimum $\gamma$ luminosity $L_{\gamma, min} = 10^{34} \text{ph s}^{-1}$ and maximum $\gamma$ luminosity $L_{\gamma, min} = 10^{37} \text{ph s}^{-1}$. Two comparison models - both of higher population densities at the position of the sun and lower luminosity bounds - are also considered, outlined in Table 3.
 
 \begin{table}
 \centering
@@ -167,144 +177,106 @@ Simulation 2 & 30 & $1.5 \times 10^{33}$ & $1.5 \times 10^{36}$ \\\hline
 
 \subsubsection{Simulated Diffuse Contribution}
 
-Before application to the source separation algorithm, the 1FHL and simulated catalogs are added to the integrated Fermi Diffuse background model \verb|gll_iem_v05_rev1.fit| between 10 GeV and 500 GeV to produce source/diffuse test cases. The integral flux of the background model in the galactic plane region contributes an all-sky flux of $4.21\text{e}^{-6} \text{ph cm}^{-2}\text{s}^{-1}$, of which $2.85\text{e}^{-7} \text{ph cm}^{-2}\text{s}^{-1}$ ($6.77\%$) is contributed by the galactic plane region.
-
-\begin{table}
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tabular}{|c|c|c|c|}
+\begin{wrapfigure}{l}{0.4\textwidth}
+\resizebox{0.4\textwidth}{!}{
+\begin{tabular}{|c|c|}
 \hline
-\textbf{Source Model} & \textbf{Total Flux/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/ph cm$^{-2}$ s$^{-1}$} & \textbf{Proportion of Flux in Galactic Region/\%}\\\hline
-\textit{Fermi} 1FHL Catalog > 10 GeV & $1.60\text{e}^{-7}$ & $2.84\text{e}^{-9}$ & 1.77\\\hline
-Reference Simulation & $9.96\text{e}^{-8}$ & $1.70\text{e}^{-8}$ & 17.1\\\hline
-Simulation 1 & $1.93\text{e}^{-7}$ & $1.94\text{e}^{-8}$ & 10.0 \\\hline
-Simulation 2 & $1.93\text{e}^{-7}$ & $1.99\text{e}^{-8}$ & 10.3 \\\hline
+\multirow{ 3}{*}{\textbf{Source Model}} & \textbf{Source Flux in} \\ 
+ & \textbf{Galactic Region/}\\
+ & \textbf{ph cm$^{-2}$ s$^{-1}$}\\\hline
+1FHL Catalog Sources & $2.84\text{e}^{-9}$ \\\hline
+Reference Simulation & $1.70\text{e}^{-8}$ \\\hline
+Simulation 1 & $1.94\text{e}^{-8}$ \\\hline
+Simulation 2 & $1.99\text{e}^{-8}$ \\\hline
 \end{tabular}}
-\caption{Galactic plane fluxes for source population catalogs.}
-\end{table}
+\makeatletter
+\def\@captype{table}
+\makeatother
+\caption{Simulated source fluxes}
+\vspace{-10pt}
+\end{wrapfigure}
+
+Before application to the source separation algorithm, the 1FHL and simulated catalogs are added to the integrated Fermi Diffuse background model \verb|gll_iem_v05_rev1.fit| between 10 GeV and 500 GeV to produce source/diffuse test cases. The integral flux of the background model in the galactic plane region contributes an all-sky flux of $4.21\text{e}^{-6}$ $ \text{ph cm}^{-2} \text{s}^{-1}$, of which $2.85\text{e}^{-7} \text{ph cm}^{-2}\text{s}^{-1}$ ($6.77\%$) is contributed by the galactic plane region.
 
 
 \section{Results}
 
-The results of this study may be categorized as those relating the the simulated inputs used to understand the algorithm, and those relating to the applicaiton of the separation algorithm to real Fermi-LAT data.
-
-\subsection{Simulation Results}
-
-\begin{wrapfigure}{l}{0.6\textwidth}
-\centering
-\resizebox{0.6\textwidth}{!}{
-\begin{tabular}{|c|c|c|}
-\hline
-\textbf{Source Model} & \textbf{True Source} & \textbf{Recovered Source}\\
-\textbf{(\& Fermi Diffuse Background)} & \textbf{Flux Fraction/\%} & \textbf{Flux Fraction/\%}\\\hline
-Fermi 1FHL Catalog > 10 GeV & 0.987 & 1.39\\\hline
-Reference Simulation & 5.63 & 3.64\\\hline
-Simulation 1 & 6.37 & 2.30\\\hline
-Simulation 2 & 6.52 & 1.97\\\hline
-\end{tabular}}
-\caption{Galaxy Modelling Parameter Values.}
-\end{wrapfigure}
-
-\subsubsection{Simulation Results}
-
-\begin{wrapfigure}{c}{\textwidth}
-  \begin{center}
-      \includegraphics[width=\textwidth]{figures/BG_1FHL.pdf}
-  \caption{Background estimation for 1FHL Catalog input image.}
-  \end{center}
-\end{wrapfigure}
-
-\begin{wrapfigure}{c}{\textwidth}
-  \begin{center}
-      \includegraphics[width=\textwidth]{figures/BG_SIM1.pdf}
-  \caption{Background estimation for reference galaxy input image.}
-  \end{center}
-\end{wrapfigure}
-
-\begin{wrapfigure}{c}{\textwidth}
-  \begin{center}
-      \includegraphics[width=\textwidth]{figures/BG_SIM2.pdf}
-  \caption{Background estimation for simulation 2 input image.}
-  \end{center}
-\end{wrapfigure}
-
-\begin{wrapfigure}{c}{\textwidth}
-  \begin{center}
-      \includegraphics[width=\textwidth]{figures/BG_SIM3.pdf}
-  \caption{Background estimation for simulation 3 input image.}
-  \end{center}
-\end{wrapfigure}
-
+The results from the simulated galaxy models are summarised in Table 5, summarising the total background flux in the Galactic region, and the reconstructed source (non-background) flux determined by the algorithm, compared to the input true source flux fraction.
 
 \begin{table}
 \centering
 \resizebox{\textwidth}{!}{
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Source Model} & \textbf{Total Flux/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/ph cm$^{-2}$ s$^{-1}$} & \textbf{Proportion of Flux in Galactic Region/\%}\\\hline
-\textit{Fermi} 1FHL Catalog > 10 GeV & $4.35\text{e}^{-6}$ & $2.83\text{e}^{-7}$ & 6.52\\\hline
-Reference Simulation & $4.30\text{e}^{-6}$ & $2.91\text{e}^{-7}$ & 6.77\\\hline
-Simulation 1 & $4.37\text{e}^{-6}$ & $2.97\text{e}^{-7}$ & 6.79 \\\hline
-Simulation 2 & $4.39\text{e}^{-6}$ & $2.99\text{e}^{-7}$ & 6.81 \\\hline
+\textbf{Source Model} & \textbf{Separated Background Flux/} & \textbf{True Source} & \textbf{Recovered Source}\\
+\textbf{(\& Fermi Diffuse Background)} & \textbf{ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux Fraction/\%} & \textbf{Flux Fraction/\%}\\\hline
+Fermi 1FHL Catalog > 10 GeV & $2.83\text{e}^{-7}$ & 0.987 & 1.39\\\hline
+Reference Simulation & $2.91\text{e}^{-7}$ & 5.63 & 3.64\\\hline
+Simulation 1 & $2.97\text{e}^{-7}$ & 6.37 & 2.30\\\hline
+Simulation 2 & $2.99\text{e}^{-7}$ & 6.52 & 1.97\\\hline
 \end{tabular}}
-\caption{Galactic plane fluxes for separated background images of the input simulation image catalogs.}
+\makeatletter
+\def\@captype{table}
+\makeatother
+\caption{Galactic plane recovered background fluxes}
 \end{table}
 
-\subsubsection{Fermi-LAT Results}
+Application to true \textit{Fermi}-LAT data to develop a diffuse model (Figure 3) produced a background estimation with a flux of $9.90\text{e}^{-8}$ ph cm$^{-2}$ s$^{-1}$ in the Galactic region. Figure 4 presents spatial profiles of the resulting model.
 
-TODO
-
-
-\begin{table}
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tabular}{|c|c|c|c|}
-\hline
-\textbf{Source Model} & \textbf{Total Flux/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/ph cm$^{-2}$ s$^{-1}$} & \textbf{Proportion of Flux in Galactic Region/\%}\\\hline
-\textit{Fermi}-LAT Observed Data, 10-500 GeV & $1.89\text{e}^{-6}$ & $9.90\text{e}^{-8}$ & 5.24\\\hline
-\end{tabular}}
-\caption{Galactic plane fluxes for separated background from true Fermi-LAT data.}
-\end{table}
-
-
-\begin{wrapfigure}{c}{\textwidth}
+\begin{figure}
   \begin{center}
-      \includegraphics[width=\textwidth]{figures/BG_DATA.pdf}
+      \includegraphics[width=0.9\textwidth]{figures/BG_DATA.pdf}
   \caption{Background estimation for Fermi-LAT Data.}
   \end{center}
-\end{wrapfigure}
+\end{figure}
 
-\begin{wrapfigure}{l}{0.5\textwidth}
-  \begin{center}
-      \includegraphics[width=0.5\textwidth]{figures/GLAT.pdf}
-  \caption{Galactic latitude profile for initial flux and background model.}
-  \end{center}
-\end{wrapfigure}
-
-\begin{wrapfigure}{c}{\textwidth}
-  \begin{center}
-      \includegraphics[width=\textwidth]{figures/GLON.pdf}
-  \caption{Galactic longitude profile for initial flux and background model.}
-  \end{center}
-\end{wrapfigure}
+\begin{figure}
+\centering
+\begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{figures/GLAT.pdf}
+\end{subfigure}
+\begin{subfigure}{0.6\textwidth}
+        \includegraphics[width=\textwidth]{figures/GLON.pdf}
+\end{subfigure}
+\caption{\textit{Fermi}-LAT Profiles for total galactic flux and estimated diffuse flux}
+\end{figure}
 
 \section{Conclusions}
 
-\begin{wrapfigure}{c}{\textwidth}
-  \begin{center}
-      \includegraphics[width=\textwidth]{figures/RATIO.pdf}
-  \caption{Ratio of background estimation over fermi diffuse model.}
-  \end{center}
-\end{wrapfigure}
-
-
-\section{Summary}
-These methods are included in the affiliated astropy open-source package, gammapy \cite{Deil}.
+The simulation results indicate that algorithm offers best performance in cases where a source population denisty is lower, with more luminous sources. In diffuse estimation, the method is less able to successfully resolve and remove lower luminosity populations - of which a greater proportion fall below a detection threshold - and higher density populations where clustered sources may be confused with an extended diffuse morphology. The diffuse estimation which results from application to LAT data largely follows the total flux distribution of the Milky Way, with some sources excluded. Shortcomings are evident where diffuse estimation exceeds the total flux. This arises due to the size of the background convolution kernel, combined with source contamination in some regions. Improved results might be achieved with fine-tuning of algorithm parameters and multiple iterations with varying convolution kernel sizes to better account for more extended sources. The methods and algorithm introduced in this study are provided in the affiliated Astropy open-source python package, Gammapy \cite{Deil}.
 
 \begin{thebibliography}{99}
 
-\bibliographystyle{plain}
-\bibliography{references}
+\bibitem{Deil}
+C.~Deil, A.~Donath, E.~Owen, R.~Terrier, and R.~B{\"{u}}hler.
+\newblock {G}ammapy {0.1}: {G}amma-ray astronomy with {P}ython.
+\newblock In {\em {P}roceedings of the {S}eventh {E}uropean {C}onference on
+  {P}ython in {S}cience (in preparation)}.
+
+\bibitem{lw}
+G.~D. Lafferty and T.~R. Wyatt.
+\newblock {W}here to stick your data points: {T}he treatment of measurements
+  within wide bins.
+\newblock {\em Nuclear Instruments and Methods in Physics Research, Section A},
+  355(2):541, 1995.
+
+\bibitem{Lorimer}
+D.~R. Lorimer.
+\newblock {T}he {P}arkes multibeam pulsar survey: {VI.} {D}iscovery and timing
+  of 142 pulsars and a {G}alactic population analysis.
+\newblock {\em Monthly Notices of the Royal Astronomical Society}, 372(2):777,
+  2006.
+
+\bibitem{Strong}
+A.~W. Strong.
+\newblock {S}ource population synthesis and the {G}alactic diffuse gamma-ray
+  emission.
+\newblock {\em Astrophysics and Space Science}, 309, 2007.
+
+\bibitem{1fhl}
+{The Fermi-LAT Collaboration}.
+\newblock The {F}irst {Fermi-LAT} {C}atalog of {S}ources {A}bove 10 {GeV}.
+\newblock {\em Astrophysical Journal Supplement Series}, 209(2):34, 2013.
 
 
 \end{thebibliography}
