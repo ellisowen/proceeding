@@ -73,16 +73,20 @@ The method is specified by six parameters, their values indicated in Table 2.
 The significance threshold was set through preliminary studies to understand how to avoid significance-triggering (and hence false source detection) on Poisson up-flucctuations. This was achieved by Poisson-flucctuating a uniform input image, and selecting a significance threshold above that for which false detections were avoided.
 
 \begin{wrapfigure}{l}{0.4\textwidth}
+\begin{center}
 \begin{tabular}{|c|c|}
 \hline
 \textbf{Containment/$\%$} & \textbf{Radius/$deg$}\\\hline
 68.0 & 0.150 \\\hline
 95.0 & 0.867 \\\hline
 \end{tabular}
-\caption{\textit{Fermi}/LAT PSF Containment representative of the 10-500 GeV energy band \footnote{The method described by \cite{lw} was used to determine an appropriate representative energy for the range considered.}}
+\end{center}
+\caption{\textit{Fermi}-LAT PSF Containment representative of the 10-500 GeV energy band \footnotemark.}
 \end{wrapfigure}
 
-THe correlation radius and mask dilation radius were chosen to be of the order of the \textit{Fermi}-LAT PSF to optimize for point source detection (see Table 3), while an elongated background kernel was chosen to follow the expected elongated background signal of the Galactic plane. A pixel size of 0.1 degrees offered suitable resolution for Fermi source detection without leading to an excessive computational load during analysis.
+\footnotetext{The method described by \cite{lw} was used to determine an appropriate representative energy for the range considered.}
+
+The correlation radius and mask dilation radius were chosen to be of the order of the \textit{Fermi}-LAT PSF to optimize for point source detection (see Table 3), while an elongated background kernel was chosen to follow the expected elongated background signal of the Galactic plane. A pixel size of 0.1 degrees offered suitable resolution for Fermi source detection without leading to an excessive computational load during analysis.
 
 \begin{wrapfigure}{r}{0.5\textwidth}
 \begin{center}
@@ -93,7 +97,7 @@ Significance cut off & 4 $\sigma$\\\hline
 Correlation radius & 0.3\degree \\\hline
 Mask dilation radius & 0.3\degree \\\hline
 Height of background kernel & 0.5\degree \\\hline
-Width of background kernel & 5\degree \\\hline
+Width of background kernel & 10\degree \\\hline
 Pixel size & 0.1\degree \\\hline
 \end{tabular}
 \end{center}
@@ -122,20 +126,6 @@ The available statistics of the energy range in question fall off steeply toward
   \end{center}
 \end{wrapfigure}
 
-\begin{table}
-\centering
-\begin{tabular}{|c|c|c|c|}
-\hline
-\multirow{2}{*}{\textbf{Energy, $E$/$GeV$}} & \multicolumn{2}{|c|}{\textbf{Number of LAT Events}}\\
- & All Sky & Galactic Plane \\\hline
-$10 < E \leq 30$ & 165564 & 49417 \\\hline
-$30 < E \leq 100$ & 34826 & 9643 \\\hline
-$100 < E \leq 500$ & 7911 & 1838 \\\hline
-$ E > 500$ & 818 & 143 \\\hline
-\end{tabular}
-\caption{Quantitative Illustration of Events observed between 10 GeV and 500 GeV}
-\end{table}
-
 \subsection{Simulation}
 
 The simulated dataset may be split two-fold. In both cases, a well-understood simple source population is added to a known background contribution - in this case, the Fermi diffuse background model \verb|gll_iem_v05_rev1.fit| was taken as a good example to model the morphology of the galactic diffuse emission.
@@ -159,20 +149,6 @@ In line with \cite{Strong}, it is assumed that the luminosity function of the $\
 $R_{\astrosun}$ is taken as the radial position of the Sun with respect to the galactic center. Standard Monte-Carlo methods are used to sample $\rho(L_{\gamma}, R, z)$ throughout the simulated galaxy and then the resulting distribution is normalized and scaled at $R_{\astrosun}$ to $A = \rho_{\astrosun}$ as the population density of the sun.
 
 In line with the 1FHL study, the radial distribution peaks at 4 kpc - thus $B = 4$ and $C = R_{\astrosun}$. The $\rho(z)$ exponential scale is set to 0.5 kpc (so $D=0.5$).
-
-\begin{wrapfigure}{l}{0.4\textwidth}
-\centering
-\resizebox{0.3\textwidth}{!}{
-\begin{tabular}{|c|c|}
-\hline
-\textbf{Model Parameter} & \textbf{Value}\\\hline
-$A$ & $\rho_{\astrosun}$ kpc$^{-2}$ \\\hline
-$B$ & 4 \\\hline
-$C$ & $R_{\astrosun}$ kpc \\\hline
-$D$ & 0.5 kpc \\\hline
-\end{tabular}}
-\caption{Galaxy Modelling Parameter Values.}
-\end{wrapfigure}
 
 A reference model is defined with $\rho_{\astrosun} = 3 \text{kpc}^{-3}$ with a minimum $\gamma$ luminosity $L_{\gamma, min} = 10^{34} \text{ph s}^{-1}$ and maximum $\gamma$ luminosity $L_{\gamma, min} = 10^{37} \text{ph s}^{-1}$. Two comparison models - both of higher population densities at the position of the sun and lower luminosity bounds - are also considered. These three models are outlined in Table 3.
 
@@ -221,10 +197,10 @@ The results of this study may be categorized as those relating the the simulated
 \hline
 \textbf{Source Model} & \textbf{True Source} & \textbf{Recovered Source}\\
 \textbf{(\& Fermi Diffuse Background)} & \textbf{Flux Fraction/\%} & \textbf{Flux Fraction/\%}\\\hline
-Fermi 1FHL Catalog > 10 GeV & 0.987 & \\\hline
-Reference Simulation & 5.63 & \\\hline
-Simulation 1 & 6.37 & \\\hline
-Simulation 2 & 6.52 & \\\hline
+Fermi 1FHL Catalog > 10 GeV & 0.987 & 1.39\\\hline
+Reference Simulation & 5.63 & 3.64\\\hline
+Simulation 1 & 6.37 & 2.30\\\hline
+Simulation 2 & 6.52 & 1.97\\\hline
 \end{tabular}}
 \caption{Galaxy Modelling Parameter Values.}
 \end{wrapfigure}
@@ -266,8 +242,8 @@ Simulation 2 & 6.52 & \\\hline
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Source Model} & \textbf{Total Flux/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/ph cm$^{-2}$ s$^{-1}$} & \textbf{Proportion of Flux in Galactic Region/\%}\\\hline
-\textit{Fermi} 1FHL Catalog > 10 GeV & $6.52\text{e}^{-6}$ & $2.83\text{e}^{-7}$ & 1.77\\\hline
-Reference Simulation & $4.30\text{e}^{-6}$ & $2.91\text{e}^{-7}$ & 6.78\\\hline
+\textit{Fermi} 1FHL Catalog > 10 GeV & $4.35\text{e}^{-6}$ & $2.83\text{e}^{-7}$ & 6.52\\\hline
+Reference Simulation & $4.30\text{e}^{-6}$ & $2.91\text{e}^{-7}$ & 6.77\\\hline
 Simulation 1 & $4.37\text{e}^{-6}$ & $2.97\text{e}^{-7}$ & 6.79 \\\hline
 Simulation 2 & $4.39\text{e}^{-6}$ & $2.99\text{e}^{-7}$ & 6.81 \\\hline
 \end{tabular}}
@@ -285,7 +261,7 @@ TODO
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Source Model} & \textbf{Total Flux/ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux in Galactic Region/ph cm$^{-2}$ s$^{-1}$} & \textbf{Proportion of Flux in Galactic Region/\%}\\\hline
-\textit{Fermi}-LAT Observed Data, 10-500 GeV & $1.90\text{e}^{-6}$ & $9.90\text{e}^{-8}$ & 5.20\\\hline
+\textit{Fermi}-LAT Observed Data, 10-500 GeV & $1.89\text{e}^{-6}$ & $9.90\text{e}^{-8}$ & 5.24\\\hline
 \end{tabular}}
 \caption{Galactic plane fluxes for separated background from true Fermi-LAT data.}
 \end{table}
