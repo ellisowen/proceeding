@@ -66,6 +66,13 @@ The initial diffuse estimation is taken as the total flux contribution, as deter
 
 The method is specified by the six parameters in Table 3, p. 5 (the values indicated refer to the example application to an dataset discussed in sections 3 and 4), and can be considered a generalization of the ring background method \cite{berge} adapted to handle elongated diffuse estimation in the Galactic plane through the use of an lengthened background kernel.
 
+\begin{wrapfigure}{r}{0.4\textwidth}
+\vspace{-10pt}
+      \includegraphics[width=0.4\textwidth]{figures/iterations.pdf}
+  \caption{Method demonstration.}
+\vspace{-30pt}
+\end{wrapfigure}
+
 In some instances, the resulting diffuse estimation algorithm will either fail, or the results should not be trusted. Primarily, in cases for which the background kernel is too small, there will be regions around sources where the exclusion mask dilates to a size larger than the box, hence diffuse estimation will fail since there is no remaining data within the kernel from which a diffuse estimate can be determined. Additionally, in cases of very low counts (\textbf{$\sim\mathcal{O}$}(10) events in the background kernel) the results are dominated by Poisson fluctuations such that any diffuse estimate would not be reliable. In these cases, it may be found that the algorithm fails completely due to an inability to determine significance values for the full analysis region, or returns a null result.
 
 \section{Dataset}
@@ -91,6 +98,13 @@ For the PSF convolved 1FHL catalog input, the resulting source-only image had a 
 
 Where the source flux contribution was entirely simulated by model galaxies, the inputs were based on the study undertaken in the simulation work of the 1FHL Catalog paper \cite[p.59]{1fhl}, which followed the essence of the study presented in \cite{Strong}. This considered a reference galaxy of a similar source population and distribution to the Milky Way, and two further simulations with different densities and proportions of bright and faint sources.
 
+\begin{wrapfigure}{r}{0.5\textwidth}
+\vspace{-10pt}
+      \includegraphics[width=0.5\textwidth]{figures/log_N_log_S.pdf}
+  \caption{Simulated population flux distributions.}
+\vspace{-10pt}
+\end{wrapfigure}
+
 In line with \cite{Strong}, it is assumed that the luminosity function of the $\gamma$-ray source population between two limits $L_{\gamma, min}$ and $L_{\gamma, max}$ follows a simple power law. Further, it is taken that the spatial distribution of pulsars offers representative example of spatial distribution of a Galactic $\gamma$-ray source population \cite[p.2]{Strong}. Thus we use a galactocentric $(R, z)$ pulsar distribution model \cite[p.7]{Lorimer} (a Gamma function) to distribute sources for the $\rho(R)$ radial source density distribution, and an exponential function for the $\rho(z)$ distribution. Standard Monte-Carlo methods are used to sample $\rho(L_{\gamma}, R, z)$ throughout the simulated galaxy. The resulting distribution is then normalized and scaled at $R_{\astrosun}$ to the observed population density at the Sun. In line with the 1FHL study, the radial distribution peaks at 4 kpc and the $\rho(z)$ exponential scale is set to 0.5 kpc.
 
 A reference model (A) is defined with $\rho_{\astrosun} = 3 \text{kpc}^{-3}$, minimum $\gamma$ luminosity $L_{\gamma, min} = 10^{34} \text{ph s}^{-1}$ and maximum $\gamma$ luminosity $L_{\gamma, max} = 10^{37} \text{ph s}^{-1}$ with luminosity power-law index $\Gamma=-1.5$. Two comparison models, B and C - both of higher population densities at the position of the Sun and lower luminosity bounds - are also considered. These are outlined in Table 3.
@@ -115,9 +129,10 @@ Before application to the source separation algorithm, the 1FHL and simulated ca
 
 In application to these inputs, the parameters for the algorithm were specified as per Table 3. The significance threshold was set through preliminary studies to understand how to avoid significance-triggering (and hence false source detection) on Poisson up-fluctuations. This was achieved by Poisson-fluctuating a uniform input image and selecting a significance threshold above that for which false detections were avoided. The correlation radius and mask dilation radius were chosen to be of the order of the \textit{Fermi}-LAT PSF to optimize for point source detection (the LAT PSF has a 68\% containment radius of 0.150\degree and 95\% containment radius of 0.867\degree in the 10-500 GeV energy band), while an elongated background kernel of suitable size to ensure all exclusion regions could be covered. A pixel size of 0.1\degree in each dimension offered good resolution for source detection without leading to an excessive computational load during analysis.
 
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{wrapfigure}{r}{0.4\textwidth}
 \vspace{-10pt}
-\begin{center}
+\centering
+\resizebox{0.37\textwidth}{!}{
 \begin{tabular}{|c|c|}
 \hline
 \textbf{Parameter} & \textbf{Value}\\\hline
@@ -127,13 +142,12 @@ Mask dilation radius & 0.3\degree \\\hline
 Height of background kernel & 0.5\degree \\\hline
 Width of background kernel & 10\degree \\\hline
 Pixel size & 0.1\degree \\\hline
-\end{tabular}
-\end{center}
+\end{tabular}}
 \makeatletter
 \def\@captype{table}
 \makeatother
-\caption{Separation Algorithm Parameters}
-\vspace{-20pt}
+\caption{Algorithm Parameters}
+\vspace{-10pt}
 \end{wrapfigure}
 
 The results from simulated galaxy models are given in Table 4, summarizing the total diffuse flux in the Galactic region and the recovered source flux determined by the algorithm compared to the input true source flux fraction. These results indicate that this method offers best performance in cases where the source population density is lower and is comprised of more luminous sources. In diffuse estimation, the method is less able to successfully resolve and remove lower luminosity source populations since a greater proportion fall below a detection threshold. Additionally, higher density populations where clustered sources may be confused with an extended diffuse morphology also lead to less successful separation results.
