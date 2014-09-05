@@ -50,14 +50,7 @@ In this work, we study the separation of sources from Galactic diffuse emission 
 
 There is a need in the $\gamma$-ray astronomy community for a method of separating source and background `diffuse' emission in the Milky Way. In high-energy GeV and TeV data analysis, the challenge lies in finding methods that are suitable for use with the low statistics observed in this regime in order to provide reliable, stable results.
 
-Galactic emission may be regarded as the sum of a number of distinct components. As definitions of these in the literature is non-standardized, we set here conventions for the terminology applied to this work. These are also illustrated in Figure 1.
-
-\begin{itemize}[noitemsep,nolistsep]
-\item \textbf{Sources} are resolvable sources of $\gamma$-rays above a given instrument detection threshold.
-\item \textbf{Unresolved sources} are those which physically exist but fall below the detection threshold of a given instrument and so are not distinguished.
-\item \textbf{Truly diffuse Galactic emission} refers to the flux contribution from physical processes leading to diffuse cosmic ray emission - at TeV energies, this is dominated by inverse Compton and $\pi^0$ decay while at lower GeV energies bremsstrahlung also contributes significantly.
-\item \textbf{Galactic background emission} is the Galactic flux contribution which cannot be directly attributed to sources. As such, this is considered as the sum of the unresolved and truly diffuse components. In this work, this Galactic background emission is referred to as `diffuse' emission.
-\end{itemize}
+Galactic emission may be regarded as the sum of a number of distinct components. In this work we simplify the picture and regard the total emission to be composed of flux from sources, while the remaining flux (attributed to unresolved sources falling below the detection threshold combined with truly diffuse emission due to inverse Compton, $\pi^0$ decay and bremmstrahlung) is referred to equally as `background' or `diffuse' flux. Thus, in Figure 1, `background' or `diffuse' contributions refer to any contribution which falls below the detection threshold, while `sources' are any contribution which is detected above this.
 
 \section{Method}
 
@@ -116,28 +109,8 @@ C & 30 & 1.5 & 1.5 \\\hline
 \caption{Parameters for 10 - 500 GeV Galaxy Population Simulations.}
 \end{table}
 
-\begin{wrapfigure}{l}{0.4\textwidth}
-\resizebox{0.4\textwidth}{!}{
-\begin{tabular}{|c|c|}
-\hline
-\multirow{ 3}{*}{\textbf{Source Model}} & \textbf{Source Flux in} \\ 
- & \textbf{Galactic Region/}\\
- & \textbf{10$^{-8}$ ph cm$^{-2}$ s$^{-1}$}\\\hline
-1FHL Catalog Sources & 0.28 \\\hline
-A & 1.70 \\\hline
-B & 1.94 \\\hline
-C & 1.99 \\\hline
-\end{tabular}}
-\makeatletter
-\def\@captype{table}
-\makeatother
-\caption{Simulated source fluxes}
-\vspace{-30pt}
-\end{wrapfigure}
-
 Before application to the source separation algorithm, the 1FHL and simulated catalogs are added to the integrated Fermi Diffuse background model \verb|gll_iem_v05_rev1.fit| between 10 GeV and 500 GeV to produce the input source \& diffuse test cases. The integral flux of this model in the Galactic plane region was $2.85 \times 10^{-7} \text{ph cm}^{-2}\text{s}^{-1}$. The fluxes of the four source populations are given in Table 2.
 
-\newpage
 \section{Results}
 
 In application to these inputs, the parameters for the algorithm were specified as per Table 3. The significance threshold was set through preliminary studies to understand how to avoid significance-triggering (and hence false source detection) on Poisson up-fluctuations. This was achieved by Poisson-fluctuating a uniform input image and selecting a significance threshold above that for which false detections were avoided. The correlation radius and mask dilation radius were chosen to be of the order of the \textit{Fermi}-LAT PSF to optimize for point source detection (the LAT PSF has a 68\% containment radius of 0.150\degree and 95\% containment radius of 0.867\degree in the 10-500 GeV energy band), while an elongated background kernel of suitable size to ensure all exclusion regions could be covered. A pixel size of 0.1\degree in each dimension offered good resolution for source detection without leading to an excessive computational load during analysis.
@@ -168,14 +141,14 @@ The results from simulated galaxy models are given in Table 4, summarizing the t
 \begin{table}
 \centering
 \resizebox{\textwidth}{!}{
-\begin{tabular}{|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Source Model} & \textbf{Separated Background Flux/} & \textbf{True Source} & \textbf{Recovered Source}\\
-\textbf{(\& Fermi Diffuse Background)} & \textbf{10$^{-7}$ ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux Fraction/\%} & \textbf{Flux Fraction/\%}\\\hline
-1FHL Catalog Sources & 2.8 & 0.99 & 1.4\\\hline
-A & 2.9 & 5.6 & 3.6\\\hline
-B & 3.0 & 6.4 & 2.3\\\hline
-C & 3.0 & 6.5 & 2.0\\\hline
+\textbf{Source Model} & \textbf{Source Flux in} & \textbf{True Source} & \textbf{Separated Background Flux/} & \textbf{Recovered Source} \\
+\textbf{(\& Fermi Diffuse Background)} & \textbf{Galactic Region/10$^{-8}$ ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux Fraction/\%} & \textbf{10$^{-7}$ ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux Fraction/\%}\\\hline
+1FHL Catalog Sources & 0.28 & 0.99 & 2.8 & 1.4 \\\hline
+A & 1.70 & 5.6 & 2.9 & 3.6 \\\hline
+B & 1.94 & 6.4 & 3.0 & 2.3 \\\hline
+C & 1.99 & 6.5 & 3.0 & 2.0 \\\hline
 \end{tabular}}
 \makeatletter
 \def\@captype{table}
