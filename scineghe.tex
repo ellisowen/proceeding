@@ -40,19 +40,18 @@ We present a simple image-analysis based method applied to \textit{Fermi}-LAT da
 
 In this work, we study the separation of sources from Galactic diffuse emission using image-based techniques. These are applied to data at energies between 10 and 500 GeV in order to understand appropriate methods for automatic diffuse modeling and source detection.
 
-\begin{wrapfigure}{r}{0.55\textwidth}
-\vspace{-10pt}
-  \centering
-      \includegraphics[width=0.55\textwidth]{figures/definitions.png}
-  \caption{Galactic emission definitions.}
-\vspace{-15pt}
-\end{wrapfigure}
-
 There is a need in the $\gamma$-ray astronomy community for a method of separating source and background `diffuse' emission in the Milky Way. In high-energy GeV and TeV data analysis, the challenge lies in finding methods that are suitable for use with the low statistics observed in this regime in order to provide reliable, stable results.
 
-Galactic emission may is thought to be the sum of a number of distinct components. However, for the purposes of this work we regard this as just two: the contribution from sources, and the background flux. In this simplified picture, sources are defined as resolvable detections which fall above a given threshold (see Figure 1), while the remaining flux (attributed to the contributions from unresolved sources and truly diffuse emission processes such as inverse Compton, $\pi^0$ decay and bremsstrahlung) forms the background - or `diffuse' - emission.
+Galactic emission may is thought to be the sum of a number of distinct components. However, for the purposes of this work we regard this as just two: the contribution from sources, and the background flux. In this simplified picture, sources are defined as resolvable detections which fall above a given threshold, while the remaining flux (attributed to the contributions from unresolved sources and truly diffuse emission processes such as inverse Compton, $\pi^0$ decay and bremsstrahlung) forms the background - or `diffuse' - emission.
 
 \section{Method}
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+\vspace{-10pt}
+      \includegraphics[width=0.4\textwidth]{figures/iterations.pdf}
+  \caption{Iterative background method demonstration.}
+\vspace{-10pt}
+\end{wrapfigure}
 
 An algorithm based on convolution with an elongated background filter and significance clipping is introduced. Its operation is summarized in the following steps.
 
@@ -65,13 +64,6 @@ An algorithm based on convolution with an elongated background filter and signif
 The initial diffuse estimation is taken as the total flux contribution, as determined from the provided counts image. The significance and mask image computation steps repeat, with excluded regions dilated in each iteration for which they fall above the significance threshold. Once there is no change in the exclusion mask, the final diffuse estimation image is returned. This iteration process is illustrated by Figure 2.
 
 Six parameters in Table 2, p. 5 (the values indicated refer to the example application to an dataset discussed in sections 3 and 4) specify the method, which can be considered a generalization of the ring background method \cite{berge} adapted to handle elongated diffuse estimation in the Galactic plane through the use of an lengthened background kernel.
-
-\begin{wrapfigure}{r}{0.4\textwidth}
-\vspace{-10pt}
-      \includegraphics[width=0.4\textwidth]{figures/iterations.pdf}
-  \caption{Method demonstration.}
-\vspace{-30pt}
-\end{wrapfigure}
 
 It should be noted that there are instances in which this diffuse estimation algorithm will either fail or return incorrect results. Primarily, in cases for which the background box kernel is too small, there will be regions around sources where the exclusion mask dilates to a size larger than the box, leading to inadequate data within the kernel from which a diffuse estimate can be computed. Additionally, in cases of very low counts (\textbf{$\sim\mathcal{O}$}(10) events in the background kernel) the results will be dominated by Poisson fluctuations. In these cases it may be found that the algorithm fails entirely if significance values cannot be calculated for the full analysis region, or a null result may be returned.
 
@@ -109,20 +101,19 @@ Figure 3 shows the flux distribution of each of the input galaxy populations. In
 
 \begin{table}
 \centering
-\resizebox{0.7\textwidth}{!}{
+\resizebox{0.8\textwidth}{!}{
 \begin{tabular}{|c|c|c|c|}
 \hline
 \multirow{ 2}{*}{\textbf{Source Model}} & \textbf{Population Density} & \textbf{Minimum Luminosity/} & \textbf{Maximum Luminosity/}\\
  & \textbf{at the Sun/$\text{kpc}^{-3}$} & \textbf{10$^{33} \text{ph s}^{-1}$} & \textbf{10$^{36} \text{ph s}^{-1}$}\\\hline
 A & 3 & 10 & 10 \\\hline
 B & 10 & 4.0 & 4.0 \\\hline
-C & 30 & 1.5 & 1.5 \\\hline
 \end{tabular}}
 \caption{Parameters for 10 - 500 GeV Galaxy Population Simulations.}
 \vspace{-20pt}
 \end{table}
 
-Before application to the source separation algorithm, the 1FHL and simulated catalogs are added to the integrated Fermi Diffuse background model \verb|gll_iem_v05_rev1.fit| between 10 GeV and 500 GeV to produce the input source \& diffuse test cases. The integral flux of this model in the Galactic plane region was $2.85 \times 10^{-7} \text{ph cm}^{-2}\text{s}^{-1}$. The fluxes of the four source populations are included in Table 3.
+Before application to the source separation algorithm, the 1FHL and simulated catalogs are added to the integrated Fermi Diffuse background model \verb|gll_iem_v05_rev1.fit| between 10 GeV and 500 GeV to produce the input source \& diffuse test cases. The integral flux of this model in the Galactic plane region was $5.25 \times 10^{-7} \text{ph cm}^{-2}\text{s}^{-1}$. The fluxes of the four source populations are included in Table 3.
 
 \section{Results}
 
@@ -155,15 +146,14 @@ For the simulated source populations, it is seen that source/diffuse separation 
 
 \begin{table}
 \centering
-\resizebox{\textwidth}{!}{
-\begin{tabular}{|c|c|c|c|c|}
+\resizebox{0.7\textwidth}{!}{
+\begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Source Model} & \textbf{Source Flux in} & \textbf{True Source} & \textbf{Separated Background Flux/} & \textbf{Recovered Source} \\
-\textbf{(\& Fermi Diffuse Background)} & \textbf{Galactic Region/10$^{-8}$ ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux Fraction/\%} & \textbf{10$^{-7}$ ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux Fraction/\%}\\\hline
-1FHL Catalog Sources & 0.28 & 0.99 & 2.8 & 1.4 \\\hline
-A & 1.70 & 5.6 & 2.9 & 3.6 \\\hline
-B & 1.94 & 6.4 & 3.0 & 2.3 \\\hline
-C & 1.99 & 6.5 & 3.0 & 2.0 \\\hline
+\multirow{ 2}{*}{\textbf{Source Model}} & \textbf{Source Flux/} & \textbf{True Source} & \textbf{Recovered Source} \\
+ & \textbf{10$^{-8}$ ph cm$^{-2}$ s$^{-1}$} & \textbf{Flux Fraction/\%} & \textbf{Flux Fraction/\%}\\\hline
+1FHL Catalog & 0.28 & 0.99 & 1.4 \\\hline
+A & 1.7 & 5.6 & 3.6 \\\hline
+B & 1.9 & 6.4 & 2.3 \\\hline
 \end{tabular}}
 \makeatletter
 \def\@captype{table}
@@ -172,7 +162,7 @@ C & 1.99 & 6.5 & 3.0 & 2.0 \\\hline
 \vspace{-20pt}
 \end{table}
 
-Application to true \textit{Fermi}-LAT data to develop a diffuse model (Figure 4) produced a diffuse estimation with a flux of $9.90 \times 10^{-8}$ ph cm$^{-2}$ s$^{-1}$ in the Galactic region. Figure 5 presents spatial profiles of the resulting diffuse model. It can be seen that the diffuse estimation here largely follows the total flux distribution of the Milky Way, with some sources excluded. Shortcomings are evident where diffuse estimation exceeds the total flux. This arises due to an inappropriately large size of the background convolution kernel in such regions, combined with source contamination in the diffuse estimation. Improved results may be possible with fine-tuning of algorithm parameters and multiple iterations of varying convolution kernel sizes which would better account for more of the extended source population.
+Application to true \textit{Fermi}-LAT data to develop a diffuse model (Figure 4) produced a diffuse estimation with a flux of $5.57 \times 10^{-7}$ ph cm$^{-2}$ s$^{-1}$ in the Galactic region. Figure 5 presents spatial profiles of the resulting diffuse model. It can be seen that the diffuse estimation here largely follows the total flux distribution of the Milky Way, with some sources excluded. Shortcomings are evident where diffuse estimation exceeds the total flux. This arises due to an inappropriately large size of the background convolution kernel in such regions, combined with source contamination in the diffuse estimation. Improved results may be possible with fine-tuning of algorithm parameters and multiple iterations of varying convolution kernel sizes which would better account for more of the extended source population.
 
 \begin{figure}
   \begin{center}
@@ -184,7 +174,7 @@ Application to true \textit{Fermi}-LAT data to develop a diffuse model (Figure 4
 
 \begin{figure}
 \centering
-\begin{subfigure}{0.3\textwidth}
+\begin{subfigure}{0.32\textwidth}
       \includegraphics[width=\textwidth]{figures/GLAT.pdf}
 \end{subfigure}
 \begin{subfigure}{0.6\textwidth}
@@ -198,7 +188,7 @@ Application to true \textit{Fermi}-LAT data to develop a diffuse model (Figure 4
 
 This work outlined a new method of modeling the Galactic diffuse emission with tests against simulated Galaxies with reasonable results. Application to observational data produced a diffuse model of similar flux total levels to those seen in the Fermi Diffuse Model \verb|gll_iem_v05_rev1.fit|, and a morphology compatible with the expected background flux of the Milky Way.
 
-Overestimation of this diffuse flux estimation was evident in some regions and steps are suggested for fine-tuning. Combined with algorithm extensions to allow for the iterative use of multiple background kernels, improvements in the resulting diffuse estimation may be achieved.
+Overestimation of this diffuse flux estimation was evident in some regions and steps are suggested for fine-tuning. Combined with algorithm extensions to allow for the iterative use of multiple background kernels, improvements in the resulting diffuse estimation may be achieved. An extension of this could be to generalize the algorithm for multi-scale detection by computing significance images with multiple correlation radii and excluding pixels above the significance threshold in any of these. Improvements might thus be expected as separation would occur on a wider range of source morphologies, not just point like sources and those with a small angular size.
 
 The methods and algorithm introduced in this study, including the Galactic population simulation methods, are provided in the affiliated Astropy open-source package, Gammapy \cite{Deil}.
 
